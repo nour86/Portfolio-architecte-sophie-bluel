@@ -128,6 +128,14 @@
     transform: scale(0);
   }
 }
+@keyframes scaleUp {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.5);
+  }
+}
 .js-hidden {
   display: none;
 }
@@ -499,6 +507,9 @@ input[type=submit] {
   width: 100%;
   height: 20px;
 }
+.modal-navbar .fa-solid:hover {
+  animation: scaleUp 200ms both;
+}
 .modal-navbar .fa-arrow-left {
   position: absolute;
   left: 0;
@@ -514,10 +525,11 @@ input[type=submit] {
 .modal-content {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   overflow: hidden;
   width: 100%;
+  height: 100%;
   padding: 0 60px;
 }
 .modal-content.slide-in-from-left {

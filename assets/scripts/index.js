@@ -1,6 +1,6 @@
 // VARIABLES
-// let projects = null
-let projects = window.localStorage.getItem("projects")
+let projects = null
+// let projects = window.localStorage.getItem("projects")
 if (projects === null) {
   // Récupération des pièces depuis l'API
   const response = await fetch("http://localhost:5678/api/works/")
