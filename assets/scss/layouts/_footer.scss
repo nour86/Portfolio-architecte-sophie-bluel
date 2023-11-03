@@ -1,0 +1,11 @@
+footer {
+  background-color: white;
+  width: 100%;
+  font-family: $main-font-family;
+  padding: 2rem;
+  nav,
+  ul {
+    display: flex;
+    justify-content: flex-end;
+  }
+}

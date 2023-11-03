@@ -1,0 +1,54 @@
+button {
+  font-family: $secondary-font-family;
+  font-weight: 700;
+  color: $main-color;
+  background-color: $main-bg-color;
+  height: 2.3rem;
+  font-size: 1rem;
+  border: 2px solid $main-color;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+  padding: 0 1em;
+  border-radius: 60px;
+  &.activated {
+    color: $main-bg-color;
+    background-color: $main-color;
+    &:hover {
+      color: $main-bg-color;
+      background-color: $main-color;
+    }
+  }
+  &:hover {
+    color: $main-bg-color;
+    background-color: $hover-color;
+  }
+}
+
+input {
+  height: 2.25rem;
+  font-size: 0.875rem;
+  border: none;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+input[type="submit"] {
+  font-family: $secondary-font-family;
+  font-weight: 700;
+  color: $main-bg-color;
+  background-color: $main-color;
+  margin: 2em auto;
+  width: 180px;
+  text-align: center;
+  border-radius: 60px;
+}
+
+.filters {
+  display: flex;
+  width: 75%;
+  justify-content: center;
+  gap: 1em;
+  margin-bottom: 2em;
+
+  &.js-hidden {
+    visibility: hidden;
+  }
+}

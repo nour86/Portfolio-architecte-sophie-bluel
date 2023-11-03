@@ -1,0 +1,32 @@
+#login {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 50vh;
+  width: 50%;
+  margin: auto;
+  > * {
+    text-align: center;
+  }
+  h2 {
+    margin-bottom: 20px;
+  }
+  form {
+    text-align: left;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    a {
+      text-align: center;
+      margin-top: 1rem;
+      text-decoration: underline;
+    }
+  }
+  label {
+    margin: 2em 0 1em 0;
+  }
+}
+.login-message {
+  text-align: center;
+  margin-top: 1rem;
+}

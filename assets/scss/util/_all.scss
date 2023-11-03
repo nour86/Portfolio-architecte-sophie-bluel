@@ -1,0 +1,13 @@
+@import "variables";
+@import "keyframes";
+
+.js-hidden {
+  display: none;
+}
+
+.info__error {
+  color: red;
+}
+.info__success {
+  color: green;
+}
