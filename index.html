@@ -67,7 +67,10 @@
       <section id="portfolio">
         <div class="section-title">
           <h2>Mes Projets</h2>
-          <a href="#main_modal" class="js-modal js-logged-in js-hidden"
+          <a
+            href="#main_modal"
+            id="js-modal"
+            class="js-modal js-logged-in js-hidden"
             ><i class="fa-regular fa-pen-to-square"></i>modifier</a
           >
         </div>
@@ -87,8 +90,8 @@
           <input type="submit" value="Envoyer" disabled />
         </form>
       </section>
-      <aside class="modal js-hidden" id="main_modal" aria-hidden="true">
-        <div class="modal-wrapper js-hidden js-modal-stop">
+      <dialog class="modal" id="modal">
+        <div class="modal-wrapper modal">
           <div class="modal-navbar">
             <i class="fa-solid fa-arrow-left js-hidden"></i>
             <i class="js-modal-close fa-solid fa-xmark"></i>
@@ -152,6 +155,7 @@
                 <option value="" selected>&nbsp;</option>
                 <!-- categories insérées par js -->
               </select>
+              <div class="upload-project-message js-hidden"></div>
               <div class="modal-footer">
                 <input
                   type="submit"
@@ -164,7 +168,7 @@
             </form>
           </div>
         </div>
-      </aside>
+      </dialog>
     </main>
     <footer>
       <nav>

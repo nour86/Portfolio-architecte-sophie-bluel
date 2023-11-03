@@ -116,6 +116,10 @@ $anim-delay: 250ms;
     opacity: 0;
     transform: translateX(800px);
   }
+  50% {
+    opacity: 0.5;
+    transform: translateX(0px);
+  }
 
   100% {
     opacity: 1;
@@ -126,6 +130,10 @@ $anim-delay: 250ms;
   0% {
     opacity: 0;
     transform: translateX(-800px);
+  }
+  50% {
+    opacity: 0.5;
+    transform: translateX(0px);
   }
 
   100% {

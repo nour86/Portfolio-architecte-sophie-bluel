@@ -105,6 +105,10 @@
     opacity: 0;
     transform: translateX(800px);
   }
+  50% {
+    opacity: 0.5;
+    transform: translateX(0px);
+  }
   100% {
     opacity: 1;
     transform: translateX(0px);
@@ -114,6 +118,10 @@
   0% {
     opacity: 0;
     transform: translateX(-800px);
+  }
+  50% {
+    opacity: 0.5;
+    transform: translateX(0px);
   }
   100% {
     opacity: 1;
@@ -269,7 +277,6 @@ html {
 
 body {
   line-height: 1;
-  max-width: 1440px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -463,43 +470,32 @@ input[type=submit] {
   visibility: hidden;
 }
 
-.modal {
-  position: fixed;
+dialog[open] {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.4);
-  animation: fadeIn 300ms both;
-}
-.modal.js-hidden {
-  display: none;
-}
-.modal[aria-hidden=true] {
-  animation: fadeOut 300ms both;
 }
 
-.modal-wrapper {
-  display: flex;
-  flex-direction: column;
+.modal {
   position: fixed;
-  align-items: center;
-  overflow: auto;
+  border: 0px;
   width: 630px;
   height: 700px;
   max-width: calc(100vw - 40px);
   max-height: calc(100vh - 40px);
-  padding: 20px;
-  border: 1px solid black;
+  padding: 0;
   border-radius: 10px;
-  background-color: white;
+  animation: slideInfromTop 300ms both;
+}
+.modal::backdrop {
+  background-color: rgba(0, 0, 0, 0.4);
   animation: fadeIn 300ms both;
 }
-.modal-wrapper.js-hidden {
-  opacity: 0;
+
+.modal-wrapper {
+  align-items: center;
+  overflow: hidden;
+  padding: 20px;
+  background-color: white;
+  animation: fadeIn 2000ms both;
 }
 
 .modal-navbar {
@@ -533,10 +529,10 @@ input[type=submit] {
   padding: 0 60px;
 }
 .modal-content.slide-in-from-left {
-  animation: slideInFromLeft 300ms both;
+  animation: slideInFromLeft 1000ms both;
 }
 .modal-content.slide-in-from-right {
-  animation: slideInFromRight 300ms both;
+  animation: slideInFromRight 1000ms both;
 }
 .modal-content.js-hidden {
   display: none;
@@ -564,6 +560,7 @@ input[type=submit] {
 
 .modal-footer {
   width: 100%;
+  bottom: 0;
   padding-top: 2rem;
   padding-bottom: 2rem;
   border-top: 1px solid grey;
@@ -605,9 +602,10 @@ input[type=submit] {
 .delete-project-message {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-content: center;
   width: 100%;
   height: 2rem;
+  padding: 1rem;
   text-align: center;
   border-top: 1px solid grey;
   font-weight: 900;
@@ -703,6 +701,9 @@ input[type=submit] {
 .modal-upload-form input[type=text]:invalid,
 .modal-upload-form select:invalid {
   border: 1px solid red;
+}
+.modal-upload-form select {
+  margin-bottom: 2rem;
 }
 .modal-upload-form option {
   font-size: 1em;
@@ -805,7 +806,7 @@ input[type=submit] {
   animation: fadeIn 300ms both;
 }
 .image-error.js-hidden {
-  opacity: 0;
+  display: none;
 }
 .image-error i {
   position: absolute;
@@ -833,6 +834,23 @@ input[type=submit] {
   width: 100%;
   height: 100%;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.35);
+}
+
+.upload-project-message {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  width: 100%;
+  height: 2rem;
+  padding: 1rem;
+  text-align: center;
+  border-top: 1px solid grey;
+  font-weight: 900;
+  font-size: 1rem;
+  animation: slideInfromBottom 300ms both;
+}
+.upload-project-message.js-hidden {
+  visibility: hidden;
 }
 
 #introduction {

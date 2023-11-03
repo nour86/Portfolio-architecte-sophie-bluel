@@ -1,6 +1,6 @@
 // VARIABLES
-let projects = null
-// let projects = window.localStorage.getItem("projects")
+// let projects = null
+let projects = window.localStorage.getItem("projects")
 if (projects === null) {
   // Récupération des pièces depuis l'API
   const response = await fetch("http://localhost:5678/api/works/")
@@ -106,56 +106,65 @@ function logOut() {
 }
 
 // MODAL //
+
+const modal = document.querySelector("#modal")
 const modalWrapper = document.querySelector(".modal-wrapper")
+const openModalButton = document.querySelector("#js-modal")
+const closeModalButton = modalWrapper.querySelector(".js-modal-close")
 const modalGallery = modalWrapper.querySelector(".modal-gallery")
+
+openModalButton.addEventListener("click", () => modal.showModal())
+modal.addEventListener("click", () => modal.close())
+closeModalButton.addEventListener("click", () => modal.close())
+modalWrapper.addEventListener("click", (event) => event.stopPropagation())
 
 //open and close modal//
 
-let modal = null
+// let modal = null
 
-const openModal = function (e) {
-  modal = document.querySelector("#main_modal")
-  modal.classList.remove("js-hidden")
-  modalWrapper.classList.remove("js-hidden")
-  modal.setAttribute("aria-hidden", "false")
-  modal.setAttribute("aria-modal", "true")
-  modal.addEventListener("click", closeModal)
-  modal.querySelector(".js-modal-close").addEventListener("click", closeModal)
-  modal
-    .querySelector(".js-modal-stop")
-    .addEventListener("click", stopPropagation)
-}
-const closeModal = function (e) {
-  if (modal === null) return
-  e.preventDefault()
-  window.setTimeout(function () {
-    modal.classList.add("js-hidden")
-    modalWrapper.classList.add("js-hidden")
-    modal = null
-  }, 300)
-  modal.setAttribute("aria-hidden", "true")
-  modal.removeAttribute("aria-modal")
-  modal.removeEventListener("click", closeModal)
-  modal
-    .querySelector(".js-modal-close")
-    .removeEventListener("click", closeModal)
-  modal
-    .querySelector(".js-modal-stop")
-    .removeEventListener("click", stopPropagation)
-}
-const stopPropagation = function (e) {
-  e.stopPropagation()
-}
+// const openModal = function (e) {
+//   modal = document.querySelector("#main_modal")
+//   modal.classList.remove("js-hidden")
+//   modalWrapper.classList.remove("js-hidden")
+//   modal.setAttribute("aria-hidden", "false")
+//   modal.setAttribute("aria-modal", "true")
+//   modal.addEventListener("click", closeModal)
+//   modal.querySelector(".js-modal-close").addEventListener("click", closeModal)
+//   modal
+//     .querySelector(".js-modal-stop")
+//     .addEventListener("click", stopPropagation)
+// }
+// const closeModal = function (e) {
+//   if (modal === null) return
+//   e.preventDefault()
+//   window.setTimeout(function () {
+//     modal.classList.add("js-hidden")
+//     modalWrapper.classList.add("js-hidden")
+//     modal = null
+//   }, 300)
+//   modal.setAttribute("aria-hidden", "true")
+//   modal.removeAttribute("aria-modal")
+//   modal.removeEventListener("click", closeModal)
+//   modal
+//     .querySelector(".js-modal-close")
+//     .removeEventListener("click", closeModal)
+//   modal
+//     .querySelector(".js-modal-stop")
+//     .removeEventListener("click", stopPropagation)
+// }
+// const stopPropagation = function (e) {
+//   e.stopPropagation()
+// }
 
-document.querySelectorAll(".js-modal").forEach((a) => {
-  a.addEventListener("click", openModal)
-})
+// document.querySelectorAll(".js-modal").forEach((a) => {
+//   a.addEventListener("click", openModal)
+// })
 
-window.addEventListener("keydown", function (e) {
-  if (e.key === "Escape" || e.key === "Esc") {
-    closeModal(e)
-  }
-})
+// window.addEventListener("keydown", function (e) {
+//   if (e.key === "Escape" || e.key === "Esc") {
+//     closeModal(e)
+//   }
+// })
 
 // display projects in modal //
 
@@ -240,6 +249,7 @@ export function displayDeletePrompt(project) {
 }
 
 export const deleteProject = async function (projectId) {
+  deleteMessage.classList.remove("js-hidden")
   try {
     const response = await fetch(
       `http://localhost:5678/api/works/${projectId}`,
@@ -250,7 +260,7 @@ export const deleteProject = async function (projectId) {
         },
       }
     )
-    deleteMessage.classList.remove("js-hidden")
+
     if (response.ok) {
       deleteMessage.innerText = "projet supprimé"
       // suppression dans le html de la page
@@ -269,7 +279,6 @@ export const deleteProject = async function (projectId) {
 
       // Stockage des informations dans le localStorage
       window.localStorage.setItem("projects", newListOfProjects)
-      console.log(projects)
     } else if (response.status == 401) {
       deleteMessage.innerText = "autorisations insuffisantes"
     } else if (response.status == 500) {
@@ -293,19 +302,18 @@ const imagePreview = modalWrapper.querySelector(".image-preview")
 const imageMessage = modalWrapper.querySelector(".info-image")
 const imageTitle = modalWrapper.querySelector("#image_title")
 const imageCategory = modalWrapper.querySelector("#image_category")
-const uploadMessage = modalWrapper.querySelector(".modal-footer p")
+const uploadMessage = modalWrapper.querySelector(".upload-project-message")
 const uploadButton = modalWrapper.querySelector("#upload_button")
 const imageCategoryId = modalWrapper.querySelector("#image_category")
 const imageError = modalWrapper.querySelector(".image-error")
 const imageErrorMessage = imageError.querySelector(".image-error-message p")
 
-// display image preview
+//drag and drop event listener
 
 imageError.addEventListener("click", function toggleImageErrorView() {
   imageError.classList.toggle("js-hidden")
   CleanUploadFields()
 })
-
 dropImageArea.addEventListener("drop", function (e) {
   e.preventDefault()
   if (e.dataTransfer.items.length > 1) {
@@ -330,6 +338,8 @@ dropImageArea.addEventListener("dragleave", function (e) {
 })
 
 imageInput.addEventListener("change", displayImagePreview)
+
+// display image preview
 
 function displayImagePreview() {
   while (imagePreview.childElementCount > 1) {
@@ -389,6 +399,7 @@ function isUploadFormValid() {
 //add project
 uploadButton.addEventListener("click", async function addProject(e) {
   e.preventDefault()
+  uploadMessage.classList.remove("js-hidden")
   let formData = new FormData()
   formData.append("image", imageInput.files[0])
   formData.append("title", imageTitle.value)
@@ -403,7 +414,6 @@ uploadButton.addEventListener("click", async function addProject(e) {
       },
       body: formData,
     })
-
     if (response.ok) {
       let newProject = await response.json()
 
@@ -436,6 +446,7 @@ uploadButton.addEventListener("click", async function addProject(e) {
   }
   setTimeout(() => {
     uploadMessage.innerText = ""
+    uploadMessage.classList.add("js-hidden")
     CleanUploadFields() // vide les champs du formulaire après 2sec
   }, 2000)
 })
