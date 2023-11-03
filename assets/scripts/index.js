@@ -249,6 +249,7 @@ export function displayDeletePrompt(project) {
 }
 
 export const deleteProject = async function (projectId) {
+  deleteMessage.classList.remove("js-hidden")
   try {
     const response = await fetch(
       `http://localhost:5678/api/works/${projectId}`,
@@ -259,7 +260,7 @@ export const deleteProject = async function (projectId) {
         },
       }
     )
-    deleteMessage.classList.remove("js-hidden")
+
     if (response.ok) {
       deleteMessage.innerText = "projet supprimé"
       // suppression dans le html de la page
@@ -307,13 +308,12 @@ const imageCategoryId = modalWrapper.querySelector("#image_category")
 const imageError = modalWrapper.querySelector(".image-error")
 const imageErrorMessage = imageError.querySelector(".image-error-message p")
 
-// display image preview
+//drag and drop event listener
 
 imageError.addEventListener("click", function toggleImageErrorView() {
   imageError.classList.toggle("js-hidden")
   CleanUploadFields()
 })
-
 dropImageArea.addEventListener("drop", function (e) {
   e.preventDefault()
   if (e.dataTransfer.items.length > 1) {
@@ -338,6 +338,8 @@ dropImageArea.addEventListener("dragleave", function (e) {
 })
 
 imageInput.addEventListener("change", displayImagePreview)
+
+// display image preview
 
 function displayImagePreview() {
   while (imagePreview.childElementCount > 1) {
@@ -397,6 +399,7 @@ function isUploadFormValid() {
 //add project
 uploadButton.addEventListener("click", async function addProject(e) {
   e.preventDefault()
+  uploadMessage.classList.remove("js-hidden")
   let formData = new FormData()
   formData.append("image", imageInput.files[0])
   formData.append("title", imageTitle.value)
@@ -411,7 +414,6 @@ uploadButton.addEventListener("click", async function addProject(e) {
       },
       body: formData,
     })
-    uploadMessage.classList.remove("js-hidden")
     if (response.ok) {
       let newProject = await response.json()
 
