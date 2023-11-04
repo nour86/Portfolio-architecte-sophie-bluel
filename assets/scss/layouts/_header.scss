@@ -32,6 +32,9 @@ header {
   i {
     padding: 0 1rem;
   }
+  &.js-hidden {
+    display: none;
+  }
 }
 
 .header-visitor {

@@ -11,7 +11,7 @@ dialog[open] {
   max-height: calc(100vh - 40px);
   padding: 0;
   border-radius: 10px;
-  animation: slideInfromTop 300ms both;
+  animation: slideInFromTop 300ms both;
 
   &::backdrop {
     background-color: rgba(0, 0, 0, 0.4);
@@ -23,7 +23,6 @@ dialog[open] {
   overflow: hidden;
   padding: 20px;
   background-color: white;
-  animation: fadeIn 2000ms both;
 }
 .modal-navbar {
   position: relative;
@@ -106,38 +105,43 @@ dialog[open] {
     min-width: 180px;
   }
 }
+.delete-project-confirm {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  font-weight: 900;
+  font-size: 1rem;
+  align-items: center;
+  justify-content: center;
+}
 .delete-project-prompt {
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
+  height: 6rem;
   width: 100%;
-  animation: slideInfromTop 200ms both;
-  margin-bottom: -2rem;
   padding: 1rem;
   line-height: 1rem;
-  border-top: 1px solid grey;
-  animation: slideInfromBottom $anim-dur both;
+  border-top: 1px solid #b3b3b3;
+  animation: slideInFromLeft $anim-dur both;
   &.js-hidden {
     display: none;
-    animation: slideOutToBottom $anim-dur both;
   }
 }
 .delete-project-message {
-  display: flex;
-  justify-content: center;
-  align-content: center;
   width: 100%;
-  height: 2rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 1rem;
-  text-align: center;
-  border-top: 1px solid grey;
-  font-weight: 900;
-  font-size: 1rem;
-  animation: slideInfromBottom $anim-dur both;
+  border-top: 1px solid #b3b3b3;
+  animation: slideInFromLeft $anim-dur both;
   &.js-hidden {
-    visibility: hidden;
+    display: none;
   }
 }
 .modal-gallery {
@@ -229,6 +233,7 @@ dialog[open] {
   }
   input[type="submit"] {
     height: 2rem;
+    margin: 0;
     width: 40%;
     border: 1px solid grey;
     background-color: $main-color;
@@ -237,9 +242,6 @@ dialog[open] {
     &:disabled {
       background-color: #a7a7a7;
     }
-  }
-  & .modal-footer {
-    margin-top: 2rem;
   }
 }
 .add-image {
@@ -357,13 +359,12 @@ dialog[open] {
   justify-content: center;
   align-content: center;
   width: 100%;
-  height: 2rem;
-  padding: 1rem;
+  height: 6rem;
+  padding: 1.5rem;
   text-align: center;
-  border-top: 1px solid grey;
+  border-top: 1px solid #b3b3b3;
   font-weight: 900;
   font-size: 1rem;
-  animation: slideInfromBottom $anim-dur both;
   &.js-hidden {
     visibility: hidden;
   }

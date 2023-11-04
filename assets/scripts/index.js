@@ -399,7 +399,6 @@ function isUploadFormValid() {
 //add project
 uploadButton.addEventListener("click", async function addProject(e) {
   e.preventDefault()
-  uploadMessage.classList.remove("js-hidden")
   let formData = new FormData()
   formData.append("image", imageInput.files[0])
   formData.append("title", imageTitle.value)
@@ -435,18 +434,25 @@ uploadButton.addEventListener("click", async function addProject(e) {
       displayModalGallery([newProject])
 
       //message de confirmation//
+      uploadMessage.classList.remove("js-hidden")
       uploadMessage.innerText = `${newProject.title} ajouté à la 
       catégorie "${newProject.category.name}" avec l'id :${newProject.id}`
     } else {
+      uploadMessage.classList.add("info__error")
+      uploadMessage.classList.remove("js-hidden")
+
       uploadMessage.innerText = "Échec de l'envoi de l'image"
     }
   } catch (error) {
+    uploadMessage.classList.add("info__error")
+    uploadMessage.classList.remove("js-hidden")
     uploadMessage.innerText = "Une erreur inattendue s'est produite"
     console.log(error)
   }
   setTimeout(() => {
     uploadMessage.innerText = ""
     uploadMessage.classList.add("js-hidden")
+    uploadMessage.classList.remove("info__error")
     CleanUploadFields() // vide les champs du formulaire après 2sec
   }, 2000)
 })

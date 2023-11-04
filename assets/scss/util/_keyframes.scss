@@ -1,6 +1,14 @@
 $anim-dur: 300ms;
 $anim-delay: 250ms;
 
+@keyframes scaleUp {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.5);
+  }
+}
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -9,7 +17,6 @@ $anim-delay: 250ms;
     opacity: 1;
   }
 }
-
 @keyframes fadeOut {
   from {
     opacity: 1;
@@ -31,7 +38,6 @@ $anim-delay: 250ms;
     opacity: 1;
   }
 }
-
 @keyframes fadeOutandMinimize {
   0% {
     transform: scale(1);
@@ -45,8 +51,15 @@ $anim-delay: 250ms;
     opacity: 0;
   }
 }
-
-@keyframes slideInfromTop {
+@keyframes minimize {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(0);
+  }
+}
+@keyframes slideInFromTop {
   from {
     opacity: 0;
     transform: translateY(-100px);
@@ -56,46 +69,6 @@ $anim-delay: 250ms;
     transform: translateY(0px);
   }
 }
-
-@keyframes slideInFromBottom {
-  from {
-    opacity: 1;
-    transform: translateY(-200px);
-  }
-  to {
-    opacity: 0;
-    transform: translateY(0px);
-  }
-}
-
-@keyframes slideOutToBottom {
-  from {
-    opacity: 1;
-    transform: translateY(0px);
-  }
-  to {
-    opacity: 0;
-    transform: translateY(200px);
-  }
-}
-@keyframes slideInfromBottom {
-  from {
-    transform: translateY(100px);
-  }
-  to {
-    transform: translateY(0px);
-  }
-}
-
-@keyframes slideOuttoRight {
-  from {
-    transform: translateX(0px);
-  }
-  to {
-    transform: translateX(500px);
-  }
-}
-
 @keyframes slideInAndTiltFromRight {
   0% {
     opacity: 0;
@@ -110,7 +83,6 @@ $anim-delay: 250ms;
     transform: translateX(0px);
   }
 }
-
 @keyframes slideInFromRight {
   0% {
     opacity: 0;
@@ -139,23 +111,5 @@ $anim-delay: 250ms;
   100% {
     opacity: 1;
     transform: translateX(0px);
-  }
-}
-
-@keyframes minimize {
-  from {
-    transform: scale(1);
-  }
-  to {
-    transform: scale(0);
-  }
-}
-
-@keyframes scaleUp {
-  from {
-    transform: scale(1);
-  }
-  to {
-    transform: scale(1.5);
   }
 }
