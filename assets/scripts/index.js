@@ -127,10 +127,16 @@ const animateModalClosing = function () {
     { once: true }
   )
 }
-modal.addEventListener("click", animateModalClosing)
-closeModalButton.addEventListener("click", animateModalClosing)
 
+closeModalButton.addEventListener("click", animateModalClosing)
+modal.addEventListener("click", animateModalClosing)
 modalWrapper.addEventListener("click", (event) => event.stopPropagation())
+modal.addEventListener("keydown", function (e) {
+  if (e.key === "Escape" || e.key === "Esc") {
+    e.preventDefault()
+    animateModalClosing()
+  }
+})
 
 // display projects in modal //
 
@@ -241,11 +247,8 @@ export const deleteProject = async function (projectId) {
         },
       }
     )
-
     if (response.ok) {
-      deleteMessage.innerText = "projet supprimé"
       // suppression dans le html de la page
-
       const allRefsToProject = document.querySelectorAll(
         `[data-id="${projectId}"]`
       )
@@ -261,13 +264,14 @@ export const deleteProject = async function (projectId) {
         )
       }
       // suppression dans la liste des projets
-      const index = (element) => element.id == projectId
-      const position = projects.findIndex(index) //trouve son index dans le tableau projects
+      const deletedProject = (element) => element.id == projectId
+      const position = projects.findIndex(deletedProject)
       projects.splice(position, 1)
-      const newListOfProjects = JSON.stringify(projects)
 
       // Stockage des informations dans le localStorage
+      const newListOfProjects = JSON.stringify(projects)
       window.localStorage.setItem("projects", newListOfProjects)
+      deleteMessage.innerText = "projet supprimé"
     } else if (response.status == 401) {
       deleteMessage.innerText = "autorisations insuffisantes"
     } else if (response.status == 500) {
@@ -280,7 +284,7 @@ export const deleteProject = async function (projectId) {
   setTimeout(() => {
     deleteMessage.innerText = ""
     deleteMessage.classList.add("js-hidden")
-  }, 2000)
+  }, 1000)
 }
 
 // ADD PROJECT FUNCTION //
@@ -404,7 +408,6 @@ uploadButton.addEventListener("click", async function addProject(e) {
     })
     if (response.ok) {
       let newProject = await response.json()
-
       //formatage de la réponse du serveur//
       newProject.categoryId = parseInt(newProject.categoryId)
       newProject.category = {
@@ -415,13 +418,10 @@ uploadButton.addEventListener("click", async function addProject(e) {
       projects.push(newProject)
       const newListOfProjects = JSON.stringify(projects)
       window.localStorage.setItem("projects", newListOfProjects)
-
       // Ajout dans la gallerie principale
       displayProjects([newProject])
-
       // Ajout dans la gallerie modal
       displayModalGallery([newProject])
-
       //message de confirmation//
       uploadMessage.classList.remove("js-hidden")
       uploadMessage.innerText = `${newProject.title} ajouté à la 
@@ -442,8 +442,8 @@ uploadButton.addEventListener("click", async function addProject(e) {
     uploadMessage.innerText = ""
     uploadMessage.classList.add("js-hidden")
     uploadMessage.classList.remove("info__error")
-    CleanUploadFields() // vide les champs du formulaire après 2sec
-  }, 2000)
+    CleanUploadFields() // vide les champs du formulaire
+  }, 1000)
 })
 
 // clean modalupload

@@ -366,6 +366,7 @@ nav li {
 }
 nav li b {
   font-weight: bold;
+  cursor: default;
 }
 
 footer {
@@ -426,6 +427,9 @@ header h1 > span {
   justify-content: space-between;
   width: 100%;
   margin: 50px 0;
+}
+.header-visitor li {
+  cursor: pointer;
 }
 
 main {
@@ -495,7 +499,7 @@ input[type=submit] {
   visibility: hidden;
 }
 
-.modal {
+.modal, .modal-wrapper {
   position: fixed;
   border: 0px;
   width: 630px;
@@ -505,24 +509,23 @@ input[type=submit] {
   padding: 0;
   border-radius: 10px;
 }
-.modal::backdrop {
+.modal::backdrop, .modal-wrapper::backdrop {
   background-color: rgba(0, 0, 0, 0.4);
 }
 
-.modal[open] {
+.modal[open], [open].modal-wrapper {
   display: flex;
   animation: slideInUp 500ms both;
 }
-.modal[open]::backdrop {
+.modal[open]::backdrop, [open].modal-wrapper::backdrop {
   animation: fadeIn 500ms both;
 }
 
-.modal[data-closing] {
-  animation: slideOutDown 500ms forwards;
+.modal[data-closing], [data-closing].modal-wrapper {
   pointer-events: none;
-  inset: 0;
+  animation: slideOutDown 500ms forwards;
 }
-.modal[data-closing]::backdrop {
+.modal[data-closing]::backdrop, [data-closing].modal-wrapper::backdrop {
   animation: fadeOut 500ms forwards;
 }
 

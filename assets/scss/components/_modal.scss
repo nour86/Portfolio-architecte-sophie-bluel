@@ -18,16 +18,17 @@
     animation: fadeIn 500ms both;
   }
 }
+
 .modal[data-closing] {
-  animation: slideOutDown 500ms forwards;
   pointer-events: none;
-  inset: 0;
+  animation: slideOutDown 500ms forwards;
   &::backdrop {
     animation: fadeOut 500ms forwards;
   }
 }
 
 .modal-wrapper {
+  @extend .modal;
   align-items: center;
   overflow: hidden;
   padding: 20px;
