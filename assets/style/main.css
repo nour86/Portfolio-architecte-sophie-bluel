@@ -449,11 +449,25 @@ dialog[open] {
   max-height: calc(100vh - 40px);
   padding: 0;
   border-radius: 10px;
-  animation: slideInFromTop 300ms both;
 }
 .modal::backdrop {
   background-color: rgba(0, 0, 0, 0.4);
-  animation: fadeIn 300ms both;
+}
+
+.modal[open] {
+  animation: fadeIn 500ms both;
+}
+.modal[open]::backdrop {
+  animation: fadeIn 500ms both;
+}
+
+.modal[data-closing] {
+  animation: fadeOut 500ms forwards;
+  pointer-events: none;
+  inset: 0;
+}
+.modal[data-closing]::backdrop {
+  animation: fadeOut 500ms forwards;
 }
 
 .modal-wrapper {

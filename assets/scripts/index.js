@@ -12,6 +12,7 @@ if (projects === null) {
 }
 let token = window.localStorage.getItem("token") // récupération du mot de passe
 
+console.log(token)
 const categories = [
   ...new Set(projects.map((project) => project.category.name)),
 ] // récupère les noms des catégories de chaque projet, puis supprime les doublons
@@ -114,57 +115,22 @@ const closeModalButton = modalWrapper.querySelector(".js-modal-close")
 const modalGallery = modalWrapper.querySelector(".modal-gallery")
 
 openModalButton.addEventListener("click", () => modal.showModal())
-modal.addEventListener("click", () => modal.close())
-closeModalButton.addEventListener("click", () => modal.close())
+
+const animateModalClosing = function () {
+  modal.setAttribute("data-closing", "")
+  modal.addEventListener(
+    "animationend",
+    () => {
+      modal.removeAttribute("data-closing")
+      modal.close()
+    },
+    { once: true }
+  )
+}
+modal.addEventListener("click", animateModalClosing)
+closeModalButton.addEventListener("click", animateModalClosing)
+
 modalWrapper.addEventListener("click", (event) => event.stopPropagation())
-
-//open and close modal//
-
-// let modal = null
-
-// const openModal = function (e) {
-//   modal = document.querySelector("#main_modal")
-//   modal.classList.remove("js-hidden")
-//   modalWrapper.classList.remove("js-hidden")
-//   modal.setAttribute("aria-hidden", "false")
-//   modal.setAttribute("aria-modal", "true")
-//   modal.addEventListener("click", closeModal)
-//   modal.querySelector(".js-modal-close").addEventListener("click", closeModal)
-//   modal
-//     .querySelector(".js-modal-stop")
-//     .addEventListener("click", stopPropagation)
-// }
-// const closeModal = function (e) {
-//   if (modal === null) return
-//   e.preventDefault()
-//   window.setTimeout(function () {
-//     modal.classList.add("js-hidden")
-//     modalWrapper.classList.add("js-hidden")
-//     modal = null
-//   }, 300)
-//   modal.setAttribute("aria-hidden", "true")
-//   modal.removeAttribute("aria-modal")
-//   modal.removeEventListener("click", closeModal)
-//   modal
-//     .querySelector(".js-modal-close")
-//     .removeEventListener("click", closeModal)
-//   modal
-//     .querySelector(".js-modal-stop")
-//     .removeEventListener("click", stopPropagation)
-// }
-// const stopPropagation = function (e) {
-//   e.stopPropagation()
-// }
-
-// document.querySelectorAll(".js-modal").forEach((a) => {
-//   a.addEventListener("click", openModal)
-// })
-
-// window.addEventListener("keydown", function (e) {
-//   if (e.key === "Escape" || e.key === "Esc") {
-//     closeModal(e)
-//   }
-// })
 
 // display projects in modal //
 
