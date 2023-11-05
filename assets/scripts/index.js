@@ -250,7 +250,15 @@ export const deleteProject = async function (projectId) {
         `[data-id="${projectId}"]`
       )
       for (const ref of allRefsToProject) {
-        ref.remove()
+        ref.setAttribute("data-deleting", "")
+        ref.addEventListener(
+          "animationend",
+          () => {
+            ref.removeAttribute("data-deleting")
+            ref.remove()
+          },
+          { once: true }
+        )
       }
       // suppression dans la liste des projets
       const index = (element) => element.id == projectId
