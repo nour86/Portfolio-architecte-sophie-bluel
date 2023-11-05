@@ -132,7 +132,6 @@ $anim-delay: 250ms;
     transform: translateX(0px);
   }
 }
-
 @keyframes slideOutToLeft {
   0% {
     opacity: 1;
@@ -141,5 +140,39 @@ $anim-delay: 250ms;
   100% {
     opacity: 0;
     transform: translateX(-800px);
+  }
+}
+
+@keyframes slideInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(1000px);
+  }
+  50% {
+    opacity: 0.5;
+    transform: translateY(-50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+@keyframes slideOutDown {
+  0% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+
+  25% {
+    opacity: 1;
+    transform: translateY(-50px);
+  }
+  75% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(1000px);
   }
 }

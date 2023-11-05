@@ -13,13 +13,13 @@
 }
 .modal[open] {
   display: flex;
-  animation: fadeIn 500ms both;
+  animation: slideInUp 500ms both;
   &::backdrop {
     animation: fadeIn 500ms both;
   }
 }
 .modal[data-closing] {
-  animation: fadeOut 500ms forwards;
+  animation: slideOutDown 500ms forwards;
   pointer-events: none;
   inset: 0;
   &::backdrop {
@@ -65,10 +65,10 @@
   height: 100%;
   padding: 0 60px;
   &.first-page {
-    animation: slideInFromLeft 300ms forwards;
+    animation: slideInFromLeft $anim-dur forwards;
   }
   &.second-page {
-    animation: slideInFromRight 300ms forwards;
+    animation: slideInFromRight $anim-dur forwards;
   }
   &.js-hidden {
     display: none;
@@ -96,10 +96,10 @@
 }
 .modal-content[data-flipping] {
   &.first-page {
-    animation: slideOutToLeft 300ms forwards;
+    animation: slideOutToLeft $anim-dur forwards;
   }
   &.second-page {
-    animation: slideOutToRight 300ms forwards;
+    animation: slideOutToRight $anim-dur forwards;
   }
 }
 
@@ -172,6 +172,7 @@
   flex-wrap: wrap;
   row-gap: 30px;
   column-gap: 9px;
+  padding-top: 5px;
   padding-bottom: 20px;
   margin-right: -50px;
   overflow-y: scroll;
