@@ -192,11 +192,12 @@
     object-fit: scale-down;
     border: 1px solid $secondary-color;
     animation: slideInfromRight 100ms both;
-    &.js-hidden {
-      display: none;
-    }
     &:hover {
       opacity: 0.6;
+      animation: scaleUpsmall 100ms both;
+    }
+    &[data-deleting] {
+      animation: fadeOut 300ms forwards;
     }
   }
   img {
@@ -217,6 +218,9 @@
     height: 17px;
     &:hover {
       cursor: pointer;
+    }
+    &[data-deleting] {
+      animation: fadeOut 300ms forwards;
     }
   }
 }

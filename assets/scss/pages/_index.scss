@@ -47,6 +47,9 @@
     img {
       width: 100%;
     }
+    figure[data-deleting] {
+      animation: fadeOut 300ms forwards;
+    }
   }
 }
 

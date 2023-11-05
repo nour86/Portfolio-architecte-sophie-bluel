@@ -6,6 +6,14 @@
     transform: scale(1.5);
   }
 }
+@keyframes scaleUpsmall {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.1);
+  }
+}
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -659,11 +667,12 @@ input[type=submit] {
   border: 1px solid #B1663C;
   animation: slideInfromRight 100ms both;
 }
-.modal-gallery figure.js-hidden {
-  display: none;
-}
 .modal-gallery figure:hover {
   opacity: 0.6;
+  animation: scaleUpsmall 100ms both;
+}
+.modal-gallery figure[data-deleting] {
+  animation: fadeOut 300ms forwards;
 }
 .modal-gallery img {
   height: 100%;
@@ -685,6 +694,9 @@ input[type=submit] {
 }
 .modal-gallery .fa-trash-can:hover {
   cursor: pointer;
+}
+.modal-gallery .fa-trash-can[data-deleting] {
+  animation: fadeOut 300ms forwards;
 }
 
 .modal-upload-form {
@@ -906,6 +918,9 @@ input[type=submit] {
 }
 #portfolio .gallery img {
   width: 100%;
+}
+#portfolio .gallery figure[data-deleting] {
+  animation: fadeOut 300ms forwards;
 }
 
 #contact {

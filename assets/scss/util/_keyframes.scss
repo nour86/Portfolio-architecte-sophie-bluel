@@ -9,6 +9,14 @@ $anim-delay: 250ms;
     transform: scale(1.5);
   }
 }
+@keyframes scaleUpsmall {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.1);
+  }
+}
 @keyframes fadeIn {
   from {
     opacity: 0;
