@@ -98,6 +98,17 @@ $anim-delay: 250ms;
     transform: translateX(0px);
   }
 }
+@keyframes slideOutToRight {
+  0% {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(800px);
+  }
+}
 @keyframes slideInFromLeft {
   0% {
     opacity: 0;
@@ -111,5 +122,16 @@ $anim-delay: 250ms;
   100% {
     opacity: 1;
     transform: translateX(0px);
+  }
+}
+
+@keyframes slideOutToLeft {
+  0% {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-800px);
   }
 }

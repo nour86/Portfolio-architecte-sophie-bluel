@@ -1,7 +1,3 @@
-dialog[open] {
-  display: flex;
-}
-
 .modal {
   position: fixed;
   border: 0px;
@@ -16,6 +12,7 @@ dialog[open] {
   }
 }
 .modal[open] {
+  display: flex;
   animation: fadeIn 500ms both;
   &::backdrop {
     animation: fadeIn 500ms both;
@@ -47,6 +44,7 @@ dialog[open] {
   }
   .fa-arrow-left {
     position: absolute;
+    animation: fadeIn 1000ms forwards;
     left: 0;
   }
   .fa-xmark {
@@ -66,11 +64,11 @@ dialog[open] {
   width: 100%;
   height: 100%;
   padding: 0 60px;
-  &.slide-in-from-left {
-    animation: slideInFromLeft 1000ms both;
+  &.first-page {
+    animation: slideInFromLeft 300ms forwards;
   }
-  &.slide-in-from-right {
-    animation: slideInFromRight 1000ms both;
+  &.second-page {
+    animation: slideInFromRight 300ms forwards;
   }
   &.js-hidden {
     display: none;
@@ -96,6 +94,15 @@ dialog[open] {
     }
   }
 }
+.modal-content[data-flipping] {
+  &.first-page {
+    animation: slideOutToLeft 300ms forwards;
+  }
+  &.second-page {
+    animation: slideOutToRight 300ms forwards;
+  }
+}
+
 .modal-footer {
   width: 100%;
   bottom: 0;

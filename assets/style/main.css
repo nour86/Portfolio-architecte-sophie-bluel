@@ -94,6 +94,16 @@
     transform: translateX(0px);
   }
 }
+@keyframes slideOutToRight {
+  0% {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(800px);
+  }
+}
 @keyframes slideInFromLeft {
   0% {
     opacity: 0;
@@ -106,6 +116,16 @@
   100% {
     opacity: 1;
     transform: translateX(0px);
+  }
+}
+@keyframes slideOutToLeft {
+  0% {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-800px);
   }
 }
 .js-hidden {
@@ -436,10 +456,6 @@ input[type=submit] {
   visibility: hidden;
 }
 
-dialog[open] {
-  display: flex;
-}
-
 .modal {
   position: fixed;
   border: 0px;
@@ -455,6 +471,7 @@ dialog[open] {
 }
 
 .modal[open] {
+  display: flex;
   animation: fadeIn 500ms both;
 }
 .modal[open]::backdrop {
@@ -487,6 +504,7 @@ dialog[open] {
 }
 .modal-navbar .fa-arrow-left {
   position: absolute;
+  animation: fadeIn 1000ms forwards;
   left: 0;
 }
 .modal-navbar .fa-xmark {
@@ -507,11 +525,11 @@ dialog[open] {
   height: 100%;
   padding: 0 60px;
 }
-.modal-content.slide-in-from-left {
-  animation: slideInFromLeft 1000ms both;
+.modal-content.first-page {
+  animation: slideInFromLeft 300ms forwards;
 }
-.modal-content.slide-in-from-right {
-  animation: slideInFromRight 1000ms both;
+.modal-content.second-page {
+  animation: slideInFromRight 300ms forwards;
 }
 .modal-content.js-hidden {
   display: none;
@@ -535,6 +553,13 @@ dialog[open] {
 .modal-content .cta > button:hover {
   color: #f7f7ed;
   background-color: #1D6154;
+}
+
+.modal-content[data-flipping].first-page {
+  animation: slideOutToLeft 300ms forwards;
+}
+.modal-content[data-flipping].second-page {
+  animation: slideOutToRight 300ms forwards;
 }
 
 .modal-footer {

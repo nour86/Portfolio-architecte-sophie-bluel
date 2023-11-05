@@ -170,22 +170,37 @@ const modalPages = modalWrapper.querySelectorAll(".modal-content")
 const addPictureButton = modalWrapper.querySelector(".js-add-picture")
 const navigateBack = modalWrapper.querySelector(".modal-navbar .fa-arrow-left")
 
-addPictureButton.addEventListener("click", function goToModalUpload() {
-  if (!deletePrompt.classList.contains("js-hidden")) {
-    deletePrompt.classList.add("js-hidden") // si le prompt est visible au moment du changement de page, on le cache
-  }
-  changeModalPage()
-})
-navigateBack.addEventListener("click", function goToModalGallery() {
-  changeModalPage()
-})
-
 function changeModalPage() {
+  if (!deletePrompt.classList.contains("js-hidden")) {
+    deletePrompt.classList.add("js-hidden")
+  } // si le prompt est visible au moment du changement de page, on le cache
   for (const page of modalPages) {
     page.classList.toggle("js-hidden")
   }
   navigateBack.classList.toggle("js-hidden")
 }
+
+function flipModalPages() {
+  const activePage = modalWrapper.querySelector(
+    ".modal-content:not(.js-hidden)"
+  )
+  activePage.setAttribute("data-flipping", "")
+  activePage.addEventListener(
+    "animationend",
+    () => {
+      activePage.removeAttribute("data-flipping")
+      changeModalPage()
+    },
+    { once: true }
+  )
+}
+
+addPictureButton.addEventListener("click", function () {
+  flipModalPages()
+})
+navigateBack.addEventListener("click", function () {
+  flipModalPages()
+})
 
 // DELETE PROJECT FUNCTION
 
