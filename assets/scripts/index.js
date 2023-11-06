@@ -1,5 +1,5 @@
 // VARIABLES
-
+// let projects = null
 let projects = window.localStorage.getItem("projects")
 
 if (projects === null) {
@@ -8,8 +8,8 @@ if (projects === null) {
     const response = await fetch("http://localhost:5678/api/works/")
     if (response.ok) {
       projects = await response.json()
-      const listOfProjects = JSON.stringify(projects) // Transformation des pièces en JSON
-      window.localStorage.setItem("projects", listOfProjects) // Stockage des informations dans le localStorage
+      const listOfProjects = JSON.stringify(projects)
+      window.localStorage.setItem("projects", listOfProjects)
     } else if (response.status == 500) {
       console.log("une erreur innatendue s'est produite")
     }
@@ -21,8 +21,6 @@ if (projects === null) {
 }
 
 let token = window.localStorage.getItem("token") // récupération du mot de passe
-
-console.log(token)
 const categories = [
   ...new Set(projects.map((project) => project.category.name)),
 ] // récupère les noms des catégories de chaque projet, puis supprime les doublons
@@ -319,12 +317,12 @@ imageError.addEventListener("click", function toggleImageErrorView() {
 })
 dropImageArea.addEventListener("drop", function (e) {
   e.preventDefault()
+
   if (e.dataTransfer.items.length > 1) {
-    imageErrorMessage.innerText = "merci de ne déposer qu'un fichier à la fois!"
+    imageErrorMessage.innerText = "Déposez un fichier à la fois!"
     imageError.classList.toggle("js-hidden")
-    setTimeout(() => {
-      dropImageArea.classList.remove("dragover")
-    }, 2000)
+    dropImageArea.classList.remove("dragover")
+    uploadButton.disabled = true
   } else {
     imageInput.files = e.dataTransfer.files
     displayImagePreview()
@@ -358,10 +356,12 @@ function displayImagePreview() {
     if (!fileTypes.includes(curFile.type)) {
       imageErrorMessage.innerText = " type de fichier non pris en compte"
       imageError.classList.toggle("js-hidden")
+      uploadButton.disabled = true
     } else {
       if (curFile.size > 4 * 1024 * 1024) {
         imageErrorMessage.innerText = `taille > 4 Mo`
         imageError.classList.toggle("js-hidden")
+        uploadButton.disabled = true
       } else {
         //instructions si toutes les conditions sont ok
         const image = document.createElement("img")
