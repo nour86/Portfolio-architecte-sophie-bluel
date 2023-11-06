@@ -1,15 +1,25 @@
 // VARIABLES
-// let projects = null
+
 let projects = window.localStorage.getItem("projects")
+
 if (projects === null) {
   // Récupération des pièces depuis l'API
-  const response = await fetch("http://localhost:5678/api/works/")
-  projects = await response.json()
-  const listOfProjects = JSON.stringify(projects) // Transformation des pièces en JSON
-  window.localStorage.setItem("projects", listOfProjects) // Stockage des informations dans le localStorage
+  try {
+    const response = await fetch("http://localhost:5678/api/works/")
+    if (response.ok) {
+      projects = await response.json()
+      const listOfProjects = JSON.stringify(projects) // Transformation des pièces en JSON
+      window.localStorage.setItem("projects", listOfProjects) // Stockage des informations dans le localStorage
+    } else if (response.status == 500) {
+      console.log("une erreur innatendue s'est produite")
+    }
+  } catch (error) {
+    console.log("une erreur innatendue s'est produite")
+  }
 } else {
   projects = JSON.parse(projects)
 }
+
 let token = window.localStorage.getItem("token") // récupération du mot de passe
 
 console.log(token)
@@ -468,7 +478,6 @@ imagePreview.addEventListener("click", function closeImagePreview() {
 })
 
 // initialisation
-
 displayProjects(projects)
 displayFilters()
 isUserLoggedIn()
