@@ -53,7 +53,5 @@ lancez le serveur du fichier BackEnd
 ```terminal
 npm start
 ```
-Puis enfin, lancez le serveur du fichier FrontEnd
-```terminal
-npm start
-```
+Puis enfin, ouvrir avec LiveServer la page index.html
+
